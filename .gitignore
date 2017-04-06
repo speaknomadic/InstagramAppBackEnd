@@ -1,4 +1,15 @@
 *.class
+/RemoteSystemsTempFiles/
+
+/.metadata
+/.recommenders
+*/.metadata
+/*/.settings
+/*/bin
+/*/.settings
+/*/.classpath
+/*/.project
+/*/*/.project
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

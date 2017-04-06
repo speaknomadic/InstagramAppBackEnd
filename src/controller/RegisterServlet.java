@@ -18,8 +18,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	/**
@@ -28,8 +27,32 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO
-		doGet(request, response);
+		
+		//add the new user to db
+		// String user = request.getParameter("user");
+		// String name = request.getParameter("name");
+		// String pass = request.getParameter("pass");
+		// String pass2 = request.getParameter("pass2");
+		// .name....
+		//
+				//validate data - if user.isEmpty and ....
+				//if not valid data
+//				
+//				boolean validData = true;
+//				
+//				String json= ;
+//				if(validData){
+//					User u = new User(name, pass, user, .....);
+//					try {
+//						UserDAO.getInstance().addUser(u);
+//					} catch (SQLException e) {
+//						System.out.println(e.getMessage());
+//				
+//					}
+//				}
+//				RequestDispatcher rd = req.getRequestDispatcher(filename);
+//				
+//			}
 	}
 
 }
