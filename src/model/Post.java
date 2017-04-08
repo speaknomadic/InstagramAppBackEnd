@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeSet;
 
-public class Post {
+public class Post implements Serializable{
 
 	public enum Type {
 		VIDEO, IMAGE;
