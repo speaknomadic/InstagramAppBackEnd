@@ -57,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
 					}
 				} catch (SQLException e) {
 
-					System.out.println("DAO EXEP" + e.getMessage()) ;
+					System.out.println("DAO EXCEP" + e.getMessage()) ;
 					e.printStackTrace();
 					
 				}
