@@ -9,11 +9,11 @@ public class DBManager {
 	private static DBManager instance;
 
 	// TODO:SetConnection parameters
-	private static final String DB_IP = "";
-	private static final String DB_PORT = "";
-	private static final String DB_NAME = "";
-	private static final String DB_USER = "";
-	private static final String DB_PASS = "";
+	private static final String DB_IP = "127.0.0.1";
+	private static final String DB_PORT = "3306";
+	private static final String DB_NAME = "mydb";
+	private static final String DB_USER = "ittalents";
+	private static final String DB_PASS = "ittalents123";
 
 	private Connection connection = null;
 

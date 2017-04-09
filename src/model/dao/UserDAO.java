@@ -1,17 +1,69 @@
 package model.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import model.User;
+import model.db.DBManager;
 
 public class UserDAO {
 
-	// TODO singleton
+	private UserDAO(){
 
-	public void addUser(User u) {
-		// TODO
-		// PreparedStatement ps =
-		// DBManager.getInstance().getConnection().prepare("INSERT INTO USERS
-		// VALUES .... ?????");
-		// ps.setString(1, u.getEmail());
-		// ps.executeQuery();
 	}
+
+	
+
+
+	public static synchronized User addUser( User u) throws SQLException {
+		
+        
+     	String userName = u.getUserName();
+		String pass = u.getPassword();
+		String phone = u.getPhone();
+		String email= u.getEmail();
+		String firstName= u.getFirstName();
+		String lastName= u.getLastName();
+		
+		
+		 String checkUserkSql ="select username,password,email from users where username = '"+userName+"' and password = '"+pass+"'";
+		 PreparedStatement chek= DBManager.getInstance().getConnection().prepareStatement(checkUserkSql);
+		 chek.execute();
+		 
+		
+		 
+		if(!chek.getResultSet().next()){
+			
+		String sql= "insert into users (username,password,phone,email,first_name, lastName ) values(?,?,?,?,?,?)";
+
+		PreparedStatement ps= DBManager.getInstance().getConnection().prepareStatement(sql);
+		ps.setString(1, userName);
+		ps.setString(2, pass);
+		ps.setString(3,phone);
+		ps.setString(4, email);
+		ps.setString(5, firstName);
+		ps.setString(6,lastName);
+		ps.execute();
+		ResultSet rs = ps.getGeneratedKeys();
+		rs.next();
+		long id = rs.getLong(1);
+		 
+		User user = new User(userName, firstName, lastName, pass, email, phone,
+				"profilePicUrl", "biography", "externalUrl", 0, 0, 
+				0, new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>());
+		user.setId(id);
+		
+		return user;
+        }
+        else{
+        	
+        	return null;
+        }
+		
+	}
+
+
 }
