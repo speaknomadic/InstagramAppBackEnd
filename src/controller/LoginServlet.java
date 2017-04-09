@@ -29,8 +29,8 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = "toblerone";
-		String password ="123456";
+		String username = request.getParameter("user");
+		String password = request.getParameter("pass");
 		try {
 			User user =UserDAO.loginUser(username, password);
 			Gson gson= new Gson();
