@@ -20,7 +20,6 @@ public class UserDAO {
 
 	public static synchronized User addUser( User u) throws SQLException {
 
-
 		String userName = u.getUserName();
 		String pass = u.getPassword();
 		String phone = u.getPhone();
@@ -28,12 +27,11 @@ public class UserDAO {
 		String firstName= u.getFirstName();
 		String lastName= u.getLastName();
 
-
-		String checkUserkSql ="select username,password,email from users where username = '"+userName+"' and password = '"+pass+"'";
+		String checkUserkSql ="select username,password,email from users where username = ? and password = ?";
 		PreparedStatement chek= DBManager.getInstance().getConnection().prepareStatement(checkUserkSql);
+		chek.setString(1, userName);
+		chek.setString(2, pass);
 		chek.execute();
-
-
 
 		if(!chek.getResultSet().next()){
 
@@ -51,12 +49,9 @@ public class UserDAO {
 			rs.next();
 			long id = rs.getLong(1);
 
-			User user = new User(userName, firstName, lastName, pass, email, phone,
-					"profilePicUrl", "biography", "externalUrl", 0, 0, 
-					0, new HashSet<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>());
-			user.setId(id);
+			u.setId(id);
 
-			return user;
+			return u;
 		}
 		else{
 
@@ -64,6 +59,8 @@ public class UserDAO {
 		}
 
 	}
+	
+	//................................................................................................
 
 	public static synchronized User loginUser(String username, String password) throws SQLException{
 		if(!username.isEmpty()&&!password.isEmpty()){
@@ -93,6 +90,24 @@ public class UserDAO {
 		}
 
 
+	}
+	
+	//................................................................................................
+	
+	public static synchronized boolean checkUsername(String username) throws SQLException{
+		
+		if(!username.isEmpty()){
+			String checkUserkSql ="select username from users where username = ?";
+			PreparedStatement chek= DBManager.getInstance().getConnection().prepareStatement(checkUserkSql);
+			chek.setString(1, username);
+			chek.execute();
+			if(chek.getResultSet().next()){
+				return true;
+			}
+			
+		}
+		return false;
+		
 	}
 
 }

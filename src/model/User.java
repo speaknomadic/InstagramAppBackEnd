@@ -13,6 +13,9 @@ public class User implements Serializable {
 	 * insert of user to the database.
 	 */
 	private long id = 0L;
+	public long getId() {
+		return id;
+	}
 
 	private String userName = "";
 	private String firstName = "";
